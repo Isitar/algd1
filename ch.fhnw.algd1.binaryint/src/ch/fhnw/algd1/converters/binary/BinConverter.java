@@ -2,7 +2,7 @@ package ch.fhnw.algd1.converters.binary;
 
 public class BinConverter {
 	public static String toString(int x) {
-		// TODO: expect x to be in range [-128, 127], return string with 8
+		// expect x to be in range [-128, 127], return string with 8
 		// binary digits representing x in 2-complement
 
 		String pattern = "00000000"; // 8 * 0
@@ -34,9 +34,15 @@ public class BinConverter {
 
 	public static int fromString(String text) {
 		int retVal = 0;
-		for (int i = 0; i < text.length(); i++) {
-
+		int counter = 0;
+		for (int i = text.length() - 1; i > 0; i--) {
+			if (text.charAt(i) == '1')
+				retVal += Math.pow(2, counter);
+			counter++;
 		}
+		// if negative
+		if (text.charAt(0) == '1')
+			retVal -= Math.pow(2, text.length() - 1);
 		return retVal;
 	}
 }
